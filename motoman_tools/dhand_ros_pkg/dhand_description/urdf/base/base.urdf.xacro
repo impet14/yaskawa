@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find dhand_description)/urdf/base/base.gazebo.xacro"/>
+
+  <xacro:macro name="dhand_base_v0">
+    <link name="dhand_base_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://dhand_description/meshes/visual/base/base.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://dhand_description/meshes/collision/base.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.22813391"/>
+        <inertia ixx="0.00052834" ixy="0.00000936" ixz="0.00000419"
+				 iyy="0.01395061" iyz="0.00000326"
+				 izz="0.01395381" />
+      </inertial>
+    </link>
+
+	<joint name="dhand_palm_joint" type="fixed">
+	  <origin xyz="0.255 0 0"/>
+	  <parent link="dhand_base_link"/>
+	  <child link="dhand_palm_link"/>
+	</joint>
+
+	<link name="dhand_palm_link"/>
+  </xacro:macro>
+  
+</robot>

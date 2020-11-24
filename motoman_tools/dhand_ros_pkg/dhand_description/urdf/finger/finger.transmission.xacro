@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="dhand_finger_trans_v0" params="prefix side">
+    <transmission name="dhand_finger_${prefix}_${side}_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="dhand_finger_${prefix}_${side}_joint">
+		<hardwareInterface>PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="dhand_finger_${prefix}_${side}_motor">
+		<hardwareInterface>PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+</robot>

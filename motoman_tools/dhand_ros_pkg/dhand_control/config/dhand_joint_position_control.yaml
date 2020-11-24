@@ -1,0 +1,38 @@
+dhand:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50    
+  # Position Controllers ---------------------------------------
+  joint_finger_base_right_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_base_right_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100} 
+  joint_finger_base_left_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_base_left_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100}
+  joint_finger_middle_middle_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_middle_middle_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100}
+  joint_finger_middle_right_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_middle_right_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100}
+  joint_finger_middle_left_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_middle_left_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100}
+  joint_finger_top_middle_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_top_middle_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100}
+  joint_finger_top_right_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_top_right_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100}
+  joint_finger_top_left_position_controller:
+    type: position_controllers/JointPositionController
+    joint: dhand_finger_top_left_joint
+    pid: {p: 100, i: 10, d: 0, i_clamp: 100} 

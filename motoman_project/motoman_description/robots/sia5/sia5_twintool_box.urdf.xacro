@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<robot name="sia5" 
+  xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- File Include -->
+  <xacro:include filename="$(find motoman_description)/robots/sia5/sia5_basic.urdf.xacro"/>
+  <xacro:include filename="$(find motoman_description)/urdf/twintool.urdf.xacro"/>
+
+  <xacro:add_world>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+  </xacro:add_world>
+
+  <!-- Joint -->
+  <joint name="tool0_twintool" type="fixed">
+    <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}"/>
+    <parent link="tool0"/>
+    <child link="00_manifold"/>
+  </joint>
+
+  <link name="tool_ee_link"/>
+  <joint name="tool0_ee_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.335 0 0"/>
+    <parent link="tool0"/>
+    <child link="tool_ee_link"/>
+  </joint>
+
+  <!-- #################### world ################### -->
+  <!--   load the model of the motoman base etc-->
+  <link name="motoman_base">
+    <visual>
+      <geometry>
+        <mesh filename="package://motoman_description/urdf/sia5/motoman_base.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+      <material name="Green">
+        <color rgba="0 1 0 0.5"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://motoman_description/urdf/sia5/motoman_base.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+    </collision>
+  </link>
+
+  <joint name="motoman_base_to_world" type="fixed">
+    <parent link="world"/>
+    <child link="motoman_base"/>
+    <origin xyz="0.55 0.33 -0.5" rpy="0 0 0"/>
+  </joint>
+
+  <link name="place_box">
+    <visual>
+      <geometry>
+        <mesh filename="package://motoman_description/urdf/sia5/box_motoman.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5707 0 0"/>
+      <material name="Green">
+        <color rgba="0 1 0 0.5"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://motoman_description/urdf/sia5/box_motoman.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5707 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="plane_base_to_place_box" type="fixed">
+    <parent link="world"/>
+    <child link="place_box"/>
+    <origin xyz="0.43 -0.210 0.028" rpy="0 0 0"/>
+  </joint>
+
+  <!-- box with d435i camera-->
+  <!-- <link name="place_d435i">
+    <visual>
+      <geometry>
+        <box size="0.125 0.34 0.34"/>
+      </geometry>
+      <origin xyz="0 0 0.17" rpy="0 0 0"/>
+      <material name="Green">
+        <color rgba="0 1 0 0.5"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.125 0.34 0.34"/>
+      </geometry>
+      <origin xyz="0 0 0.17" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="plane_base_to_place_d435i" type="fixed">
+    <parent link="world"/>
+    <child link="place_d435i"/>
+    <origin xyz="0.14 0 0.028" rpy="0 0 0"/>
+  </joint> -->
+
+  <!-- place backplane-->
+  <link name="backplane">
+    <visual>
+      <geometry>
+        <box size="0.0001 2 2"/>
+      </geometry>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <material name="Red">
+        <color rgba="1 0 0 0.1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.0001 2 2"/>
+      </geometry>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="pole1_to_backplane" type="fixed">
+    <parent link="world"/>
+    <child link="backplane"/>
+    <origin xyz="-0.59 0 0" rpy="0 0 0"/>
+  </joint>
+</robot>

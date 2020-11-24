@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<robot name="twintool">
+	<link name="00_manifold">
+		<visual>
+			<origin rpy="0.0 3.1415 3.1415" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/00_ManifoldV2.dae" />
+			</geometry>
+		</visual>
+	</link>
+	<joint name="manifold_to_robotiq-fts-300_adapter" type="fixed">
+		<parent link="00_manifold" />
+		<child link="01_robotiq-fts-300_adapter" />
+		<origin xyz="0 0 0.015" />
+	</joint>
+	<link name="01_robotiq-fts-300_adapter">
+		<visual>
+			<origin rpy="0.0 0 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/01_ROBOTIQ_FTS-300_ADAPTER.dae" />
+			</geometry>
+		</visual>
+	</link>
+	<joint name="robotiq-fts-300_adapter_to_robotiq-fts-300" type="fixed">
+		<parent link="01_robotiq-fts-300_adapter" />
+		<child link="02_robotiq-fts-300" />
+		<origin xyz="0.0375 -0.0375 0.05431" />
+	</joint>
+	<link name="02_robotiq-fts-300">
+		<visual>
+			<origin rpy="0.0 3.1415 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/02_ROBOTIQ_FTS-300.STL" />
+			</geometry>
+		</visual>
+	</link>	
+	<joint name="robotiq-fts-300_to_mee-base" type="fixed">
+		<parent link="02_robotiq-fts-300" />
+		<child link="03.5_mee-base" />
+		<origin xyz="-0.0375 0.0375 0" />
+	</joint>
+	<link name="03.5_mee-base">
+		<visual>
+			<origin rpy="0.0 0 0.3926875" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/03.5_Modular End Effector_Base_V2.dae" />
+			</geometry>
+		</visual>
+	</link>
+	<joint name="mee-base_to_mee-mx106-assembly" type="fixed">
+		<parent link="03.5_mee-base" />
+		<child link="05-1_mee-mx106-assembly" />
+		<origin xyz="-0.03 0.01325 0.015" />
+	</joint>
+	<link name="05-1_mee-mx106-assembly">
+		<visual>
+			<origin rpy="0 -1.57075 3.1415" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/05-Modular End Effector_MX-106_Assembly.STL" />
+			</geometry>
+		</visual>
+	</link>
+	<!-- 3.5341875 -->
+	<joint name="twintool_joint1" type="revolute">
+		<axis xyz="0 0.70710678118 0.70710678118" />
+		<limit effort="1000.0" lower="0.0" upper="3.15" velocity="0.5" />
+		<parent link="05-1_mee-mx106-assembly" />
+		<child link="06_mee-tool-base" />
+		<origin xyz="0.03 -0.01325 0.0625" rpy="0 0 0" />
+	</joint>
+	<link name="06_mee-tool-base">
+		<visual>
+			<origin rpy="0 0 3.1415" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/06-Modular End Effector_Tool Base.dae" />
+			</geometry>
+		</visual>
+	</link>
+	<joint name="mee-tool-base_to_vacuum-pad" type="fixed">
+		<parent link="06_mee-tool-base" />
+		<child link="07-0_vacuum-pad" />
+		<origin xyz="0 0 0.1075" />
+	</joint>
+	<link name="07-0_vacuum-pad">
+		<visual>
+			<origin rpy="-1.57075 0 3.1415" xyz="0 0 0.01955" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/07-0_VPB10WN_6J.dae" />
+			</geometry>
+		</visual>
+	</link>
+	<joint name="twintool_joint2_1" type="revolute">
+		<axis xyz="0 0 1" />
+		<limit effort="1000.0" lower="0" upper="0.6" velocity="0.5" />
+		<parent link="06_mee-tool-base" />
+		<child link="07-1-1_soft-robotics-gripper" />
+		<origin xyz="0.0355 0.131 0" />
+	</joint>
+	<link name="07-1-1_soft-robotics-gripper">
+		<visual>
+			<origin rpy="0 0 0" xyz="-0.00325 0 -0.016" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/07-1-1_SDK_M1FR-3Acc.STL" />
+			</geometry>
+		</visual>
+	</link>
+	<joint name="twintool_joint2_2" type="revolute">
+		<axis xyz="0 0 1" />
+		<limit effort="1000.0" lower="-0.6" upper="0" velocity="0.5" />
+		<parent link="06_mee-tool-base" />
+		<child link="07-1-2_soft-robotics-gripper" />
+		<origin xyz="-0.0355 0.131 0" />
+		<mimic joint="twintool_joint2_1" multiplier="-1" offset="0" />
+	</joint>
+	<link name="07-1-2_soft-robotics-gripper">
+		<visual>
+			<origin rpy="0 3.1415 0" xyz="0.00325 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/07-1-2_SDK_M1FR-3Acc.STL" />
+			</geometry>
+		</visual>
+	</link>	
+	<link name="tool_center_point"/>
+  	<joint name="tool0_tool_center_point_joint" type="fixed">
+		<parent link="06_mee-tool-base" />
+		<child link="tool_center_point" />
+		<origin xyz="0 0.131 0" rpy="0 1.57075 1.57075"/>
+	</joint> 
+</robot>
+<!-- -0.00226 -->

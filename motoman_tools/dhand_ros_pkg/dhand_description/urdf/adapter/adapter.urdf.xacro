@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find dhand_description)/urdf/adapter/adapter.gazebo.xacro"/>
+  
+  <xacro:macro name="dhand_adapter_v0">	
+    <link name="dhand_adapter_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://dhand_description/meshes/visual/adapter/adapter.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://dhand_description/meshes/collision/adapter.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.09444833"/>
+        <inertia ixx="1e-3" ixy="0.00000000" ixz="0.00000000"
+				 iyy="1e-3" iyz="0.00000000"
+				 izz="1e-3" />
+      </inertial>
+    </link>
+  </xacro:macro>
+</robot>

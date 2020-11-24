@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find motoman_control)/launch/sia5/sia5_with_dhand_streaming.launch"/>
+  <include file="$(find motoman_control)/launch/sia5/sia5_real_control.launch"/>
+  <include file="$(find motoman_moveit)/launch/sia5_with_dhand_and_1kinect.launch"/>
+</launch>

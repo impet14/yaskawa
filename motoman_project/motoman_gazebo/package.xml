@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>motoman_gazebo</name>
+  <version>0.1.0</version>
+  <description>The motoman_gazebo package</description>
+
+  <maintainer email="groadpg@gmail.com">RyodoTanaka</maintainer>
+  <license>BSD</license>
+  <url type="repository">http://github.com/Nishida-Lab/motoman_project</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <!--depend>actionlib_msgs</depend-->
+  <depend>motoman_description</depend>
+  <depend>motoman_point_cloud</depend>
+  <exec_depend>ros_control</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>motoman_control</exec_depend>
+</package>

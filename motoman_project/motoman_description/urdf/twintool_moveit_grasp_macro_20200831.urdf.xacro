@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="twintool">
+    
+
+    <link name="00_manifold">
+		<visual>
+			<origin rpy="${-pi/2} ${-pi/2} ${pi/2}" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/20200831/00_Manifold_20200831.stl" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="${-pi/2} ${-pi/2} ${pi/2}" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/20200831/00_Manifold_20200831.stl" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="manifold_to_robotiq-fts-300_adapter" type="fixed">
+		<parent link="00_manifold" />
+		<child link="01_robotiq-fts-300_adapter" />
+		<origin xyz="0 0 0.015" />
+	</joint>
+	<link name="01_robotiq-fts-300_adapter">
+		<visual>
+			<origin rpy="0.0 0 ${pi}" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/20200831/02_ROBOTIQ_FTS-300_ADAPTER.stl"  scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="0.0 0 ${pi}" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/20200831/02_ROBOTIQ_FTS-300_ADAPTER.stl"  scale="0.001 0.001 0.001"/>
+			</geometry>
+		</collision>
+	</link>   
+    <!-- ********************************************************************************************************** -->
+    <xacro:macro name="robotiq_ft300" params="parent prefix *origin">
+        <!-- mount the fts to the robot -->
+        <joint name="${prefix}ft300_fix" type="fixed">
+            <xacro:insert_block name="origin" />
+            <parent link="${parent}" />
+            <!-- <child link="${prefix}ft300_mounting_plate" /> -->
+            <child link="${prefix}ft300_sensor" />
+        </joint>
+        <!-- Link representing the FT300 force-torque sensor -->
+        <link name="${prefix}ft300_sensor">
+            <inertial>
+                <origin xyz="0 0 ${-17 / 1000}" rpy="0 0 0"/>
+                <mass value="0.300"/>
+                <inertia ixx="${262 / 1000000}" ixy="0" ixz="${1 / 1000000}" iyy="${265 / 1000000}" iyx="0" iyz="${1 / 1000000}" izz="${219 / 1000000}" izx="${-1 / 1000000}" izy="${1 / 1000000}"/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/visual/robotiq_ft300.STL"/>
+                </geometry>
+                <material name="Robotiq-Black">
+                    <color rgba="0.2 0.2 0.2 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://robotiq_ft_sensor/meshes/collision/robotiq_ft300.STL"/>
+                </geometry>
+            </collision>
+        </link>
+        <joint name="${prefix}measurment_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 ${pi} ${-pi/2}" />
+            <parent link="${prefix}ft300_sensor" />
+            <child link="${prefix}robotiq_ft_frame_id" />
+        </joint>
+
+        <link name="${prefix}robotiq_ft_frame_id"/>
+    </xacro:macro>
+    <!-- *+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+ -->
+    <xacro:robotiq_ft300 parent="01_robotiq-fts-300_adapter" prefix="">
+		<origin xyz="0 0 0.0535" rpy="0 ${pi} ${pi}"/> 
+	</xacro:robotiq_ft300>
+
+
+    <joint name="robotiq-fts-300_to_mee-base" type="fixed">
+		<parent link="ft300_sensor" />
+		<child link="03.5_mee-base" />
+		<origin xyz="0 0 0" rpy="0 ${pi} ${pi}"/>
+	</joint>
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<link name="03.5_mee-base">
+		<visual>
+			<origin rpy="${-pi/2} ${-pi/2} ${pi/2}" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/20200831/04_MX106-Assem_20200831.stl" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="${-pi/2} ${-pi/2} ${pi/2}" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://motoman_description/meshes/twintool/20200831/04_MX106-Assem_20200831.stl" scale="0.001 0.001 0.001"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="mee-base_to_rs-d35" type="fixed">
+		<parent link="03.5_mee-base" />
+		<child link="05_rs-d435" />
+		<origin xyz="${-17.50000094/1000} ${52/1000+0.015} ${(53.5+77)/1000}" />
+	</joint>
+	<link name="05_rs-d435">
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://realsense2_description/meshes/d435.dae"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0" />
+			<geometry>
+				<mesh filename="package://realsense2_description/meshes/d435.dae"/>
+			</geometry>
+		</collision>
+	</link>
+    <joint name="twintool_joint1" type="revolute">
+		<axis xyz="0 0 1" />
+		<limit effort="1000.0" lower="0.0" upper="3.15" velocity="0.5" />
+		<parent link="03.5_mee-base" />
+		<child link="dual_gripper_mount" />
+        <origin xyz="0 0 ${77.50003396/1000}" rpy="${pi/4} 0 0" />
+	</joint>
+
+    <joint name="mee-base_to_imu_lpms-b2" type="fixed">
+		<parent link="03.5_mee-base" />
+		<child link="imu_lpms-b2_frame_id" />
+		<origin xyz="0 0 0.0425" />
+	</joint>
+    <link name="imu_lpms-b2_frame_id">
+    </link>
+    <link name="dual_gripper_mount">
+    </link>
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <xacro:macro name="dual_gripper" params="parent *origin">
+        <joint name="dual_gripper_fix" type="fixed">
+            <xacro:insert_block name="origin" />
+            <parent link="${parent}" />
+            <child link="06_mee-tool-base" />
+        </joint>
+        <link name="06_mee-tool-base">
+            <visual>
+                <origin rpy="0 ${-pi/2} 0" xyz="0 0 0" />
+                <geometry>
+                    <mesh filename="package://motoman_description/meshes/twintool/20200831/06_Tool base-Assem_20200831.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin rpy="0 ${-pi/2} 0" xyz="0 0 0" />
+                <geometry>
+                    <mesh filename="package://motoman_description/meshes/twintool/20200831/06_Tool base-Assem_20200831.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+        <!-- **************************************************************************************************** -->
+        <joint name="mee-tool-base_to_vacuum-pad" type="fixed">
+            <parent link="06_mee-tool-base" />
+            <child link="07-0_vacuum-pad" />
+            <origin xyz="0 0 0" />
+        </joint>
+        <link name="07-0_vacuum-pad">
+            <visual>
+                <origin rpy="0 ${-pi/2} ${pi/2}" xyz="0 0 ${0.065}" />
+                <geometry>
+                    <mesh filename="package://motoman_description/meshes/twintool/20200831/10_Vacuum_20200831.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin rpy="0 ${-pi/2} ${pi/2}" xyz="0 0 ${0.065}" />
+                <geometry>
+                    <mesh filename="package://motoman_description/meshes/twintool/20200831/10_Vacuum_20200831.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="tool0_center_point"/>
+        <joint name="tool0_center_point_joint" type="fixed">
+            <parent link="06_mee-tool-base" />
+            <child link="tool0_center_point" />
+            <origin xyz="0 0 ${0.152}" rpy="0 0 ${pi}"/>
+        </joint> 
+        <!-- **************************************************************************************************** -->
+        <joint name="twintool_joint2_1" type="revolute">
+            <axis xyz="-1 0 0" />
+            <limit effort="1000.0" lower="0" upper="0.6" velocity="0.5" />
+            <parent link="06_mee-tool-base" />
+            <child link="07-1-1_soft-robotics-gripper" />
+            <origin xyz="${0.0225} ${-0.08603427086} 0" rpy="0 ${-pi/2} 0"/>
+        </joint>
+        <joint name="twintool_joint2_2" type="revolute">
+            <axis xyz="-1 0 0" />
+            <limit effort="1000.0" lower="-0.6" upper="0" velocity="0.5" />
+            <parent link="06_mee-tool-base" />
+            <child link="07-1-2_soft-robotics-gripper" />
+            <origin xyz="${-0.0225} ${-0.08603427086} 0" rpy="0 ${-pi/2} 0"/>
+            <mimic joint="twintool_joint2_1" multiplier="-1" offset="0" />
+        </joint>
+
+        <xacro:arg name="with_tongs" default="false" />        
+        <xacro:if value="$(arg with_tongs)">
+            <link name="07-1-1_soft-robotics-gripper">
+                <visual>
+                    <origin rpy="0 0 0" xyz="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://motoman_description/meshes/twintool/20200831/08-1.5_SRDK-R-wTong_20200831.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </visual>
+                <collision>
+                    <origin rpy="0 0 0" xyz="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://motoman_description/meshes/twintool/20200831/08-1.5_SRDK-R-wTong_20200831.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </collision>
+            </link>
+            <link name="07-1-2_soft-robotics-gripper">
+                <visual>
+                    <origin rpy="0 0 0" xyz="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://motoman_description/meshes/twintool/20200831/08-2.5_SRDK-L-wTong_20200831.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </visual>
+                <collision>
+                    <origin rpy="0 0 0" xyz="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://motoman_description/meshes/twintool/20200831/08-2.5_SRDK-L-wTong_20200831.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </collision>
+            </link>
+            
+        </xacro:if>
+
+        <xacro:unless value="$(arg with_tongs)">
+            <link name="07-1-1_soft-robotics-gripper">
+                <visual>
+                    <origin rpy="0 0 0" xyz="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://motoman_description/meshes/twintool/20200831/08-1_SRDK-R_20200831.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </visual>
+                <collision>
+                    <origin rpy="0 0 0" xyz="0 -${(0.065+0.06)/2} -0.01" />
+                    <!-- <origin rpy="0 0 0" xyz="0 0 0" /> -->
+                    <geometry>
+                        <box size="0.035 ${0.065+0.06} 0.025"/>
+                        <!-- <mesh filename="package://motoman_description/meshes/twintool/20200831/08-1_SRDK-R_20200831.stl" scale="0.001 0.001 0.001"/> -->
+                    </geometry>
+                </collision>
+            </link>
+            <link name="07-1-2_soft-robotics-gripper">
+                <visual>
+                    <origin rpy="0 0 0" xyz="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://motoman_description/meshes/twintool/20200831/08-2_SRDK_20200831.stl" scale="0.001 0.001 0.001"/>
+                    </geometry>
+                </visual>
+                <collision>
+                    <origin rpy="0 0 0" xyz="0 -${(0.065+0.06)/2} 0.01" />
+                    <!-- <origin rpy="0 0 0" xyz="0 0 0" /> -->
+                    <geometry>
+                        <box size="0.035 ${0.065+0.06} 0.025"/>
+                        <!-- <mesh filename="package://motoman_description/meshes/twintool/20200831/08-2_SRDK_20200831.stl" scale="0.001 0.001 0.001"/> -->
+                    </geometry>
+                </collision>
+            </link>
+        </xacro:unless>      
+                
+        <link name="tool1_center_point"/>
+        <joint name="tool1_center_point_joint" type="fixed">
+            <parent link="06_mee-tool-base" />
+            <child link="tool1_center_point" />
+            <origin xyz="0 ${-0.08603427086-0.065} 0" rpy="${pi/2} 0  0"/>
+        </joint> 
+    </xacro:macro>
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    
+    <xacro:dual_gripper parent="dual_gripper_mount">
+		<origin xyz="0 0 0" rpy="${-pi/4} ${pi*0} 0"/> 
+        <!-- p = 3.1415 for two finger gripper and p = 0 for vacuum pad--> <!--FOR NOW -->
+	</xacro:dual_gripper>
+</robot>

@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: motoman_description
+    relative_path: robots/sia5/sia5_twintool.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/sia5.srdf
+  CONFIG:
+    author_name: sakmongkon
+    author_email: m-san@mmcs.mse.kyutech.ac.jp
+    generated_timestamp: 1600357853

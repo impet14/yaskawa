@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="twintool">
+
+<!-- <xacro:include filename="$(find motoman_description)/urdf/twintool.urdf"/> -->
+<xacro:include filename="$(find motoman_description)/urdf/twintool_moveit_grasp_macro_20200831.urdf.xacro"/>
+<!-- <xacro:add_world>
+    <<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+</xacro:add_world> -->
+</robot>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot name="dhand" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find dhand_description)/robots/dhand.urdf.xacro"/>
+  <xacro:include filename="$(find dhand_description)/urdf/adapter/adapter.urdf.xacro"/>
+  
+  <joint name="dhand_base_joint" type="fixed">
+	<origin xyz="0.028 0 0" rpy="0 0 0"/>
+	<parent link="dhand_adapter_link"/>
+	<child link="dhand_base_link"/>
+  </joint>
+  <xacro:dhand_adapter_v0/>
+  
+</robot>

@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/hayashi/worksp/yaskawa/devel/include",
+                "/home/hayashi/worksp/arduino_ws/devel/include",
+                "/home/hayashi/worksp/tomato_ws/devel/include",
+                "/home/hayashi/worksp/camera_ws/devel/include",
+                "/opt/ros/melodic/include",
+                "/home/hayashi/worksp/yaskawa/src/motoman_project/motoman_recognition/motoman_cable_removal/include",
+                "/home/hayashi/worksp/yaskawa/src/motoman/motoman_driver/include",
+                "/home/hayashi/worksp/yaskawa/src/motoman_project/motoman_recognition/motoman_euclidean_cluster/include",
+                "/home/hayashi/worksp/yaskawa/src/motoman_project/motoman_recognition/motoman_point_cloud/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

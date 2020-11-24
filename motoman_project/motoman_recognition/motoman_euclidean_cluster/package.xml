@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>motoman_euclidean_cluster</name>
+  <version>0.0.0</version>
+  <description>The motoman_euclidean_cluster package</description>
+
+  <maintainer email="ry0@todo.todo">Ry0</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>motoman_viz_msgs</depend>
+  <depend>pcl_conversions</depend>
+  <depend>pcl_msgs</depend>
+  <depend>pcl_ros</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+
+  <test_depend>roslaunch</test_depend>
+
+  <export>
+  </export>
+</package>

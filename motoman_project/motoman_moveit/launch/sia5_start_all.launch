@@ -1,0 +1,7 @@
+<launch>
+  <include file="$(find motoman_control)/launch/sia5/sia5_twintool_streaming.launch"/>
+  <include file="$(find motoman_control)/launch/sia5/sia5_real_control.launch"/>
+  <!-- <include file="$(find motoman_moveit)/launch/sia5_with_dhand_moveit_planning_execution.launch"/> -->
+  <include file="$(find motoman_moveit)/launch/sia5_twin_tool_moveit_planning_execution.launch"/>
+  <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="1.32 0 0.23 1.56 0 -1.56 /world /kinect2_link 100" />
+</launch>

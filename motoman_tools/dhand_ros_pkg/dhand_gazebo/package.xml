@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>dhand_gazebo</name>
+  <version>0.0.1</version>
+  <description>The dhand_gazebo package</description>
+  
+  <maintainer email="groadpg@gmail.com">RyodoTanaka</maintainer>
+  <license>BSD</license>
+  <url type="repository">http://github.com/Nishida-Lab/dhand_ros_pkg</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>ros_control</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>dhand_control</run_depend>
+  
+</package>

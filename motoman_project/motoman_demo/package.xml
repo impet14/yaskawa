@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>motoman_demo</name>
+  <version>1.0.0</version>
+  <description>The motoman_demo package</description>
+
+  <maintainer email="groadpg@gmail.com">RyodoTanaka</maintainer>
+  <license>BSD</license>
+  <url type="repository">http://github.com/Nishida-Lab/motoman_project</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>tf</depend>
+  <depend>moveit_commander</depend>
+  <depend>motoman_demo_msgs</depend>
+  <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
+
+  <exec_depend>ar_pose</exec_depend>
+  <exec_depend>image_proc</exec_depend>
+  <exec_depend>motoman_moveit_config</exec_depend>
+  <exec_depend>rosbridge_server</exec_depend>
+  <exec_depend>rviz</exec_depend>
+  
+</package>

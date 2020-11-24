@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>motoman_point_cloud</name>
+  <version>1.1.0</version>
+  <description>The motoman_point_cloud package</description>
+
+  <maintainer email="groadpg@gmail.com">RyodoTanaka</maintainer>
+  <maintainer email="ry0@todo.todo">ry0</maintainer>
+  <maintainer email="p595201m@mail.kyutech.jp">MoriKen</maintainer>
+
+  <license>BSD</license>
+  <url type="repository">http://github.com/Nishida-Lab/motoman_project</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>boost</depend>
+  <depend>cmake_modules</depend>
+  <depend>eigen</depend>
+  <depend>pcl_ros</depend>
+  <depend>pcl_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+  <depend>tf_conversions</depend>
+  
+  <build_depend>libpcl-all-dev</build_depend>
+
+  <exec_depend>libpcl-all</exec_depend>
+  <exec_depend>motoman_moveit</exec_depend>
+  <exec_depend>rviz</exec_depend>
+
+  <test_depend>roslaunch</test_depend>
+
+</package>

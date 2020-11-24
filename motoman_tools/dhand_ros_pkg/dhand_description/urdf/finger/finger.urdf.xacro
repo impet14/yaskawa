@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find dhand_description)/urdf/common.xacro"/>
+  <xacro:include filename="$(find dhand_description)/urdf/finger/finger.gazebo.xacro"/>
+  <xacro:include filename="$(find dhand_description)/urdf/finger/finger.transmission.xacro"/>
+  
+  <xacro:macro name="dhand_finger_v0" params="parent prefix side *joint_origin *joint_axis *joint_limit *mass *inertia">
+	<joint name="dhand_finger_${prefix}_${side}_joint" type="revolute">
+	  <insert_block name="joint_origin"/>
+	  <parent link="${parent}"/>
+	  <child link="dhand_finger_${prefix}_${side}_link"/>
+	  <insert_block name="joint_axis"/>
+	  <dynamics damping="0.7" friction="0.7"/>
+	  <insert_block name="joint_limit"/>
+	</joint>
+
+	<link name="dhand_finger_${prefix}_${side}_link">
+	  <visual>
+		<geometry>
+		  <mesh filename="package://dhand_description/meshes/visual/finger/${prefix}/finger_${prefix}.dae"/>
+		</geometry>
+	  </visual>
+	  <collision>
+		<geometry>
+		  <mesh filename="package://dhand_description/meshes/collision/finger/finger_${prefix}.STL"/>
+		</geometry>
+	  </collision>
+	  <inertial>
+		<insert_block name="mass"/>
+	  	<insert_block name="inertia"/>
+	  </inertial>
+	</link>
+  </xacro:macro>
+
+  <xacro:macro name="dhand_fixed_finger_base">
+	<joint name="dhand_finger_base_middle_joint" type="fixed">
+	  <origin xyz="0.1865 0 0.03" rpy="0 ${90*M_PI/180} 0"/>
+	  <parent link="dhand_base_link"/>
+	  <child link="dhand_finger_base_middle_link"/>
+	</joint>
+
+	<link name="dhand_finger_base_middle_link">
+	  <visual>
+		<geometry>
+		  <mesh filename="package://dhand_description/meshes/visual/finger/base/finger_base.dae"/>
+		</geometry>
+	  </visual>
+	  <collision>
+		<geometry>
+		  <mesh filename="package://dhand_description/meshes/collision/finger/finger_base.STL"/>
+		</geometry>
+	  </collision>
+	  <inertial>
+		<mass value="0.04234931"/>
+		<inertia ixx="1e-3" ixy="0.00000000" ixz="-0.00001443"
+				 iyy="1e-3" iyz="0.00000000"
+				 izz="1e-3" />
+	  </inertial>
+	</link>
+  </xacro:macro>
+</robot>

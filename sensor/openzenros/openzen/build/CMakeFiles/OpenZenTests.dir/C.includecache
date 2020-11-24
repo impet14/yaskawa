@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hayashi/worksp/yaskawa/src/sensor/openzenros/openzen/src/LpMatrix.c
+LpMatrix.h
+/home/hayashi/worksp/yaskawa/src/sensor/openzenros/openzen/src/LpMatrix.h
+stdio.h
+/home/hayashi/worksp/yaskawa/src/sensor/openzenros/openzen/src/stdio.h
+
+/home/hayashi/worksp/yaskawa/src/sensor/openzenros/openzen/src/LpMatrix.h
+math.h
+-
+cstdint
+-
+

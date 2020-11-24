@@ -1,0 +1,13 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/hayashi/worksp/yaskawa/devel/lib/python2.7/dist-packages",
+        "/home/hayashi/worksp/arduino_ws/devel/lib/python2.7/dist-packages",
+        "/home/hayashi/worksp/tomato_ws/devel/lib/python2.7/dist-packages",
+        "/home/hayashi/worksp/camera_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages"
+    ],
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp"
+    }
+}
